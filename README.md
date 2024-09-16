@@ -3,4 +3,4 @@ Udemy Kurs Projekt um erste Erfahrungen mit der DotNet entwicklung und SQL Daten
 Frameworks: 
 DotNet
 Dapper
-Entity Component Framework
+Entity Framework
