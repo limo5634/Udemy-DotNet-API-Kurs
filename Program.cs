@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Numerics;
 using Dapper;
+using HelloWorld.Data;
 using HelloWorld.Models;
 using Microsoft.Data.SqlClient;
 
@@ -14,15 +15,11 @@ namespace HelloWorld
     {
         public static void Main(string[] args)
         {
-            string connectionString = "Server=localhost;Database=DotNetCourseDatabase;TrustServerCertificate=true;Trusted_Connection=true;";
-
-
-            IDbConnection dbConnection = new SqlConnection(connectionString);
-
+            DataContextDapper dapper = new DataContextDapper();
 
 
             string sglCommand = "SELECT GETDATE()";
-            DateTime rightNow = dbConnection.QuerySingle<DateTime>(sglCommand);
+            DateTime rightNow = dapper.LoadDataSingle<DateTime>(sglCommand);
 
 
             Console.WriteLine(rightNow.ToString());
@@ -51,9 +48,10 @@ namespace HelloWorld
                     + "','" + myComputer.Price.ToString("0.00", CultureInfo.InvariantCulture)
                     + "','" + myComputer.VideoCard
             + "')";
-            Console.WriteLine(sql);
-            int result = dbConnection.Execute(sql);
-            Console.WriteLine(result);
+            //    Console.WriteLine(sql);
+            //  int result = dapper.ExecuteSqlWithRowCount(sql);
+            bool result = dapper.ExecuteSql(sql);
+            //    Console.WriteLine(result);
             // Console.WriteLine(myComputer.Price);
 
 
@@ -65,7 +63,7 @@ namespace HelloWorld
                                         Computer.VideoCard 
                                     FROM TutorialAppSchema.Computer";
 
-            IEnumerable<Computer> computers = dbConnection.Query<Computer>(sqlSelect);
+            IEnumerable<Computer> computers = dapper.LoadData<Computer>(sqlSelect);
             Console.WriteLine("'Motherboard','HasWifi','HasLTE','ReleaseDate'"
                             + ",'Price','VideoCard'");
             foreach (Computer singleComputer in computers)
