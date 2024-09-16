@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Numerics;
 using Dapper;
@@ -18,21 +19,65 @@ namespace HelloWorld
 
             IDbConnection dbConnection = new SqlConnection(connectionString);
 
+
+
             string sglCommand = "SELECT GETDATE()";
             DateTime rightNow = dbConnection.QuerySingle<DateTime>(sglCommand);
-            Console.WriteLine(rightNow);
 
-            // Computer myComputer = new Computer() 
-            // {
-            //     Motherboard = "Z690",
-            //     HasWifi = true,
-            //     HasLTE = false,
-            //     ReleaseDate = DateTime.Now,
-            //     Price = 943.87m,
-            //     VideoCard = "RTX 2060"
-            // };
 
+            Console.WriteLine(rightNow.ToString());
+
+            Computer myComputer = new Computer()
+            {
+                Motherboard = "Z690",
+                HasWifi = true,
+                HasLTE = false,
+                ReleaseDate = DateTime.Now,
+                Price = 943.87m,
+                VideoCard = "RTX 2060"
+            };
+
+            string sql = @"INSERT INTO TutorialAppSchema.Computer (
+                Motherboard,
+                HasWifi,
+                HasLTE,
+                ReleaseDate,
+                Price,
+                VideoCard
+            ) VALUES ('" + myComputer.Motherboard
+                    + "','" + myComputer.HasWifi
+                    + "','" + myComputer.HasLTE
+                    + "','" + myComputer.ReleaseDate.ToString("yyyy-MM-dd")
+                    + "','" + myComputer.Price.ToString("0.00", CultureInfo.InvariantCulture)
+                    + "','" + myComputer.VideoCard
+            + "')";
+            Console.WriteLine(sql);
+            int result = dbConnection.Execute(sql);
+            Console.WriteLine(result);
             // Console.WriteLine(myComputer.Price);
+
+
+            string sqlSelect = @"SELECT Computer.Motherboard,
+                                        Computer.HasWifi,
+                                        Computer.HasLTE,
+                                        Computer.ReleaseDate,
+                                        Computer.Price,
+                                        Computer.VideoCard 
+                                    FROM TutorialAppSchema.Computer";
+
+            IEnumerable<Computer> computers = dbConnection.Query<Computer>(sqlSelect);
+            Console.WriteLine("'Motherboard','HasWifi','HasLTE','ReleaseDate'"
+                            + ",'Price','VideoCard'");
+            foreach (Computer singleComputer in computers)
+            {
+                Console.WriteLine("'" + singleComputer.Motherboard
+                    + "','" + singleComputer.HasWifi
+                    + "','" + singleComputer.HasLTE
+                    + "','" + singleComputer.ReleaseDate.ToString("yyyy-MM-dd")
+                    + "','" + singleComputer.Price.ToString("0.00", CultureInfo.InvariantCulture)
+                    + "','" + singleComputer.VideoCard + "'");
+            }
+
         }
     }
 }
