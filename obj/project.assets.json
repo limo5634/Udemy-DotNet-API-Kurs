@@ -2391,11 +2391,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\fkoeh\\dotnet-course-code\\HelloWorld\\HelloWorld.csproj",
+      "projectUniqueName": "H:\\dotNet\\dotnet-course-code\\HelloWorld\\HelloWorld.csproj",
       "projectName": "HelloWorld",
-      "projectPath": "C:\\Users\\fkoeh\\dotnet-course-code\\HelloWorld\\HelloWorld.csproj",
+      "projectPath": "H:\\dotNet\\dotnet-course-code\\HelloWorld\\HelloWorld.csproj",
       "packagesPath": "C:\\Users\\fkoeh\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\fkoeh\\dotnet-course-code\\HelloWorld\\obj\\",
+      "outputPath": "H:\\dotNet\\dotnet-course-code\\HelloWorld\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\fkoeh\\AppData\\Roaming\\NuGet\\NuGet.Config",

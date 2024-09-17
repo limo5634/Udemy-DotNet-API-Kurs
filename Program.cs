@@ -16,7 +16,7 @@ namespace HelloWorld
         public static void Main(string[] args)
         {
             DataContextDapper dapper = new DataContextDapper();
-
+            DataContextEF entityFramework = new DataContextEF();
 
             string sglCommand = "SELECT GETDATE()";
             DateTime rightNow = dapper.LoadDataSingle<DateTime>(sglCommand);
@@ -33,6 +33,9 @@ namespace HelloWorld
                 Price = 943.87m,
                 VideoCard = "RTX 2060"
             };
+
+            entityFramework.Add(myComputer);
+            entityFramework.SaveChanges();
 
             string sql = @"INSERT INTO TutorialAppSchema.Computer (
                 Motherboard,
@@ -55,7 +58,8 @@ namespace HelloWorld
             // Console.WriteLine(myComputer.Price);
 
 
-            string sqlSelect = @"SELECT Computer.Motherboard,
+            string sqlSelect = @"SELECT Computer.ComputerId,
+                                        Computer.Motherboard,
                                         Computer.HasWifi,
                                         Computer.HasLTE,
                                         Computer.ReleaseDate,
@@ -64,11 +68,14 @@ namespace HelloWorld
                                     FROM TutorialAppSchema.Computer";
 
             IEnumerable<Computer> computers = dapper.LoadData<Computer>(sqlSelect);
-            Console.WriteLine("'Motherboard','HasWifi','HasLTE','ReleaseDate'"
+
+
+            Console.WriteLine("'ComputerId',''Motherboard','HasWifi','HasLTE','ReleaseDate'"
                             + ",'Price','VideoCard'");
             foreach (Computer singleComputer in computers)
             {
-                Console.WriteLine("'" + singleComputer.Motherboard
+                Console.WriteLine("'" + singleComputer.ComputerID
+                    + "','" + singleComputer.Motherboard
                     + "','" + singleComputer.HasWifi
                     + "','" + singleComputer.HasLTE
                     + "','" + singleComputer.ReleaseDate.ToString("yyyy-MM-dd")
@@ -76,6 +83,27 @@ namespace HelloWorld
                     + "','" + singleComputer.VideoCard + "'");
             }
 
+
+            IEnumerable<Computer>? computersEF = entityFramework.Computer?.ToList<Computer>();
+
+            if (computersEF != null)
+            {
+                Console.WriteLine("'ComputerId',''Motherboard','HasWifi','HasLTE','ReleaseDate'"
+                            + ",'Price','VideoCard'");
+                foreach (Computer singleComputer in computersEF)
+                {
+                    Console.WriteLine("'" + singleComputer.ComputerID
+                        + "','" + singleComputer.Motherboard
+                        + "','" + singleComputer.HasWifi
+                        + "','" + singleComputer.HasLTE
+                        + "','" + singleComputer.ReleaseDate.ToString("yyyy-MM-dd")
+                        + "','" + singleComputer.Price.ToString("0.00", CultureInfo.InvariantCulture)
+                        + "','" + singleComputer.VideoCard + "'");
+                }
+
+            }
         }
+
+
     }
 }

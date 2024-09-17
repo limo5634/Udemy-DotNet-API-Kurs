@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZS5UwZRi6os=",
+  "dgSpecHash": "oTG6p7S9YX0=",
   "success": true,
-  "projectFilePath": "C:\\Users\\fkoeh\\dotnet-course-code\\HelloWorld\\HelloWorld.csproj",
+  "projectFilePath": "H:\\dotNet\\dotnet-course-code\\HelloWorld\\HelloWorld.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\fkoeh\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\fkoeh\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
