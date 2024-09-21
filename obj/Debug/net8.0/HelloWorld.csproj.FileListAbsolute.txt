@@ -146,3 +146,4 @@ H:\dotNet\dotnet-course-code\HelloWorld\bin\Debug\net8.0\Microsoft.Extensions.Fi
 H:\dotNet\dotnet-course-code\HelloWorld\bin\Debug\net8.0\Microsoft.Extensions.FileSystemGlobbing.dll
 H:\dotNet\dotnet-course-code\HelloWorld\bin\Debug\net8.0\appsettings.json
 H:\dotNet\dotnet-course-code\HelloWorld\bin\Debug\net8.0\Newtonsoft.Json.dll
+H:\dotNet\dotnet-course-code\HelloWorld\bin\Debug\net8.0\AutoMapper.dll

@@ -25,15 +25,13 @@ namespace HelloWorld.Data
         }
 
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("TutorialAppSchema");
 
             modelBuilder.Entity<Computer>()
-                //  .HasNoKey();
-                .HasKey(c => c.ComputerID);
-            // .ToTable("Computer", "TutorialAppSchema");
-            // .ToTable("TableName", "SchemaName");
+                .ToTable("ComputerForTestApp", "TutorialAppSchema")
+                .HasKey(e => e.ComputerId);
         }
 
 
