@@ -138,3 +138,10 @@ H:\dotNet\dotnet-course-code\HelloWorld\obj\Debug\net8.0\refint\HelloWorld.dll
 H:\dotNet\dotnet-course-code\HelloWorld\obj\Debug\net8.0\HelloWorld.pdb
 H:\dotNet\dotnet-course-code\HelloWorld\obj\Debug\net8.0\HelloWorld.genruntimeconfig.cache
 H:\dotNet\dotnet-course-code\HelloWorld\obj\Debug\net8.0\ref\HelloWorld.dll
+H:\dotNet\dotnet-course-code\HelloWorld\bin\Debug\net8.0\Microsoft.Extensions.Configuration.dll
+H:\dotNet\dotnet-course-code\HelloWorld\bin\Debug\net8.0\Microsoft.Extensions.Configuration.FileExtensions.dll
+H:\dotNet\dotnet-course-code\HelloWorld\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Json.dll
+H:\dotNet\dotnet-course-code\HelloWorld\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Abstractions.dll
+H:\dotNet\dotnet-course-code\HelloWorld\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Physical.dll
+H:\dotNet\dotnet-course-code\HelloWorld\bin\Debug\net8.0\Microsoft.Extensions.FileSystemGlobbing.dll
+H:\dotNet\dotnet-course-code\HelloWorld\bin\Debug\net8.0\appsettings.json

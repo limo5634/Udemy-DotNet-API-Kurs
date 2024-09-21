@@ -8,6 +8,7 @@ using Dapper;
 using HelloWorld.Data;
 using HelloWorld.Models;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 
 namespace HelloWorld
 {
@@ -15,14 +16,8 @@ namespace HelloWorld
     {
         public static void Main(string[] args)
         {
-            DataContextDapper dapper = new DataContextDapper();
-            DataContextEF entityFramework = new DataContextEF();
 
-            string sglCommand = "SELECT GETDATE()";
-            DateTime rightNow = dapper.LoadDataSingle<DateTime>(sglCommand);
-
-
-            Console.WriteLine(rightNow.ToString());
+            //   Console.WriteLine(rightNow.ToString());
 
             Computer myComputer = new Computer()
             {
@@ -34,8 +29,6 @@ namespace HelloWorld
                 VideoCard = "RTX 2060"
             };
 
-            entityFramework.Add(myComputer);
-            entityFramework.SaveChanges();
 
             string sql = @"INSERT INTO TutorialAppSchema.Computer (
                 Motherboard,
@@ -51,57 +44,16 @@ namespace HelloWorld
                     + "','" + myComputer.Price.ToString("0.00", CultureInfo.InvariantCulture)
                     + "','" + myComputer.VideoCard
             + "')";
-            //    Console.WriteLine(sql);
-            //  int result = dapper.ExecuteSqlWithRowCount(sql);
-            bool result = dapper.ExecuteSql(sql);
-            //    Console.WriteLine(result);
-            // Console.WriteLine(myComputer.Price);
 
+            //      File.WriteAllText("log.txt", "\n" + sql + "\n");
 
-            string sqlSelect = @"SELECT Computer.ComputerId,
-                                        Computer.Motherboard,
-                                        Computer.HasWifi,
-                                        Computer.HasLTE,
-                                        Computer.ReleaseDate,
-                                        Computer.Price,
-                                        Computer.VideoCard 
-                                    FROM TutorialAppSchema.Computer";
+            using StreamWriter openFile = new("log.txt", append: true);
+            openFile.WriteLine("\n" + sql + "\n");
+            openFile.Close();
 
-            IEnumerable<Computer> computers = dapper.LoadData<Computer>(sqlSelect);
+            string fileText = File.ReadAllText("log.txt");
 
-
-            Console.WriteLine("'ComputerId',''Motherboard','HasWifi','HasLTE','ReleaseDate'"
-                            + ",'Price','VideoCard'");
-            foreach (Computer singleComputer in computers)
-            {
-                Console.WriteLine("'" + singleComputer.ComputerID
-                    + "','" + singleComputer.Motherboard
-                    + "','" + singleComputer.HasWifi
-                    + "','" + singleComputer.HasLTE
-                    + "','" + singleComputer.ReleaseDate.ToString("yyyy-MM-dd")
-                    + "','" + singleComputer.Price.ToString("0.00", CultureInfo.InvariantCulture)
-                    + "','" + singleComputer.VideoCard + "'");
-            }
-
-
-            IEnumerable<Computer>? computersEF = entityFramework.Computer?.ToList<Computer>();
-
-            if (computersEF != null)
-            {
-                Console.WriteLine("'ComputerId',''Motherboard','HasWifi','HasLTE','ReleaseDate'"
-                            + ",'Price','VideoCard'");
-                foreach (Computer singleComputer in computersEF)
-                {
-                    Console.WriteLine("'" + singleComputer.ComputerID
-                        + "','" + singleComputer.Motherboard
-                        + "','" + singleComputer.HasWifi
-                        + "','" + singleComputer.HasLTE
-                        + "','" + singleComputer.ReleaseDate.ToString("yyyy-MM-dd")
-                        + "','" + singleComputer.Price.ToString("0.00", CultureInfo.InvariantCulture)
-                        + "','" + singleComputer.VideoCard + "'");
-                }
-
-            }
+            Console.WriteLine(fileText);
         }
 
 
